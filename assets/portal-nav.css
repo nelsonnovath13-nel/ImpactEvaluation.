@@ -81,6 +81,27 @@ a.pn-active::after{content:"●";margin-left:6px;font-size:8px;vertical-align:mi
 #pn-toast .pn-resume{background:var(--pn-lime);color:#172033}
 #pn-toast .pn-dismiss{background:#16233b;color:#cfd9ea}
 
+/* Download-as-PDF button (uses the browser's native Print → Save as PDF) */
+#pn-download-wrap{display:flex;justify-content:center;margin:18px 0 4px}
+#pn-download-wrap button{background:#fff;color:var(--pn-navy);border:2px solid var(--pn-navy);padding:11px 18px;
+  border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  font-family:Inter,"Segoe UI",Arial,sans-serif}
+#pn-download-wrap button:hover{background:var(--pn-navy);color:#fff}
+#pn-download-wrap button:disabled{opacity:.6;cursor:progress}
+
+/* Combined multi-lecture printable document, built on demand from the course's own pages */
+#pn-print-combined{display:none}
+body.pn-printing-combined #pn-print-combined{display:block;max-width:900px;margin:0 auto;padding:24px;
+  font-family:Inter,"Segoe UI",Arial,sans-serif;color:#1f2937}
+body.pn-printing-combined > *:not(#pn-print-combined){display:none!important}
+.pn-print-title{font-size:1.8rem;margin:0 0 18px;color:#0B1220}
+.pn-print-lecture{margin-bottom:10px}
+.pn-print-lecture + .pn-print-lecture{page-break-before:always;margin-top:30px}
+.pn-print-lecture .toc,.pn-print-lecture .sidebar,.pn-print-lecture nav,.pn-print-lecture aside{display:none!important}
+@media print{
+  #pn-print-combined section,#pn-print-combined .section{break-inside:avoid-page}
+}
+
 /* Focus visibility, consistent everywhere this layer touches */
 #pn-bar a:focus-visible,#pn-menu-btn:focus-visible,#pn-drawer a:focus-visible,#pn-drawer .pn-close:focus-visible,
 #pn-nextprev a:focus-visible,#pn-subject-link a:focus-visible,#pn-backhome a:focus-visible,#pn-toast button:focus-visible{
@@ -88,4 +109,10 @@ a.pn-active::after{content:"●";margin-left:6px;font-size:8px;vertical-align:mi
 
 @media(prefers-reduced-motion:reduce){
   #pn-drawer,#pn-toast,#pn-progress-bar{transition:none!important}
+}
+
+/* Never print the portal's own chrome — only the academic content should appear in a saved PDF */
+@media print{
+  #pn-bar,#pn-progress,#pn-menu-btn,#pn-drawer,#pn-backdrop,#pn-nextprev,#pn-subject-link,
+  #pn-backhome,#pn-download-wrap,#pn-toast{display:none!important}
 }

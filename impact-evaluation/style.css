@@ -24,6 +24,17 @@ ol.steps li{padding-left:6px;margin:10px 0}
 
 @media(max-width:600px){.cards{grid-template-columns:1fr;padding:0 6% 50px}}
 
+@media print{
+  .top,.toc{display:none}
+  .layout{display:block;padding:0}
+  article{width:100%}
+  .hero{background:#fff;color:#000;border:1px solid #999}
+  .hero p{color:#333}
+  .hero .kicker{color:#173b67}
+  section{border:0;padding:0 0 14px;break-inside:avoid-page}
+  .footer{display:none}
+}
+
 /* Final responsive and accessibility audit layer */
 html{color-scheme:light;-webkit-text-size-adjust:100%}
 a:focus-visible,button:focus-visible{outline:3px solid #B8E64C;outline-offset:3px}

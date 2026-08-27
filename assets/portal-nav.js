@@ -36,6 +36,7 @@
     setupActiveHighlight(drawerParts && drawerParts.links);
     setupProgress(progressWrap);
     buildNextPrev();
+    buildDownloadButton();
     setupContinueReading();
   });
 
@@ -301,6 +302,82 @@
     } else {
       document.body.appendChild(node);
     }
+  }
+
+  var DOWNLOAD_ICON = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width:16px;height:16px;flex:0 0 auto"><path d="M12 4v11m0 0 4-4m-4 4-4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 18.5h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+
+  function pickPrintableSource(doc){
+    var hero = doc.querySelector(".hero");
+    var content = doc.querySelector("article") || doc.querySelector(".content") || doc.querySelector("main");
+    var wrap = document.createElement("div");
+    wrap.className = "pn-print-lecture";
+    if(hero) wrap.appendChild(hero.cloneNode(true));
+    if(content) wrap.appendChild(content.cloneNode(true));
+    return wrap;
+  }
+
+  function downloadCombinedPDF(btn, courseName, siblings){
+    var originalHtml = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = "<span>Preparing PDF…</span>";
+
+    function cleanup(){
+      document.body.classList.remove("pn-printing-combined");
+      var existing = document.getElementById("pn-print-combined");
+      if(existing) existing.remove();
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+      window.removeEventListener("afterprint", cleanup);
+    }
+
+    var fetches = siblings.map(function(s){
+      return fetch(s.url).then(function(res){
+        if(!res.ok) throw new Error("fetch failed: " + s.url);
+        return res.text();
+      }).then(function(html){
+        var doc = new DOMParser().parseFromString(html, "text/html");
+        return pickPrintableSource(doc);
+      });
+    });
+
+    Promise.all(fetches).then(function(lectureNodes){
+      var container = document.createElement("div");
+      container.id = "pn-print-combined";
+      var title = document.createElement("h1");
+      title.className = "pn-print-title";
+      title.textContent = courseName + " — Complete Course";
+      container.appendChild(title);
+      lectureNodes.forEach(function(node){ container.appendChild(node); });
+      document.body.appendChild(container);
+      document.body.classList.add("pn-printing-combined");
+      window.addEventListener("afterprint", cleanup);
+      setTimeout(function(){
+        window.print();
+        setTimeout(function(){ if(document.body.classList.contains("pn-printing-combined")) cleanup(); }, 60000);
+      }, 60);
+    }).catch(function(){
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+      window.alert("Could not prepare the combined course PDF right now. You can still open each lecture and use your browser's Print → Save as PDF option on that page.");
+    });
+  }
+
+  function buildDownloadButton(){
+    var wrap = el("div", {id:"pn-download-wrap"});
+    var btn = el("button", {type:"button"});
+    if(CFG.siblings && CFG.siblings.length > 1){
+      btn.innerHTML = DOWNLOAD_ICON + " <span>Download Full Course as PDF</span>";
+      btn.addEventListener("click", function(){
+        downloadCombinedPDF(btn, (CFG.subject && CFG.subject.name) || document.title, CFG.siblings);
+      });
+    } else if(CFG.subject){
+      btn.innerHTML = DOWNLOAD_ICON + " <span>Download This Course as PDF</span>";
+      btn.addEventListener("click", function(){ window.print(); });
+    } else {
+      return;
+    }
+    wrap.appendChild(btn);
+    insertBeforeFooter(wrap);
   }
 
   function setupContinueReading(){
