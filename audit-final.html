@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Final Source Audit | Academic Study Portal</title>
+<style>
+body{font-family:Arial,sans-serif;line-height:1.65;background:#f7f8fa;color:#1f2937;margin:0}
+main{max-width:1000px;margin:auto;padding:40px 20px 70px}.hero{background:#0b1220;color:#fff;padding:38px;border-radius:18px}
+section{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:26px;margin-top:20px}
+h1,h2{color:#0b1220}.hero h1{color:#fff}table{width:100%;border-collapse:collapse}th,td{padding:10px;border:1px solid #e5e7eb;text-align:left}th{background:#eff6ff}
+.ok{color:#166534;font-weight:bold}.note{background:#fff8e1;padding:15px;border-left:4px solid #eab308;border-radius:8px}
+a{color:#2563eb}
+</style></head>
+<body><main>
+<div class="hero"><h1>Final Source Completeness Audit</h1><p>Academic Study Portal · Audit performed against the four ZIP source packages supplied for the final review.</p></div>
+
+<section><h2>1. Audit Decision</h2>
+<p class="ok">The portal structure is valid as one website with one deployment link and four separate course areas. Each course retains its own topics and subtopics instead of mixing unrelated notes.</p>
+<p>The four supplied ZIP packages represent four course areas: Consultancy Skills; Impact Evaluation; Project Financing, Budget & Procurement; and Principles of Monitoring & Evaluation.</p></section>
+
+<section><h2>2. Source Inventory Reviewed</h2>
+<table><tr><th>Course</th><th>Source package</th><th>Unique source structure audited</th></tr>
+<tr><td>Consultancy Skills</td><td>Consultancy skills.zip</td><td>Session 1, Session 2 and review document</td></tr>
+<tr><td>Impact Evaluation</td><td>ImpactEvaluation_L1_L2_L3_Study_Portal.zip</td><td>Existing L1, L2 and L3 study portal pages</td></tr>
+<tr><td>Project Financing, Budget & Procurement</td><td>Project Financing_Budget_Procurement.zip</td><td>Resource mobilization, community mobilization, external funds/cost sharing, PPP, financial analysis, project finance, project budgeting and procurement</td></tr>
+<tr><td>Principles of M&E</td><td>principal of M_E.zip</td><td>Topic One, Topic Two, monitoring approach lesson, evaluation approach lesson, Theory of Change/Action, LFA and causal analysis</td></tr></table></section>
+
+<section><h2>3. Duplicate-File Audit</h2>
+<p>Several files in the Project Financing package are duplicate copies of the same lecture material. They were consolidated rather than repeated as separate topics. This avoids false duplication while preserving the unique content once.</p>
+<p class="ok">Duplicate consolidation does not mean the lecture content was removed.</p></section>
+
+<section><h2>4. Corrections Made During the Final Audit</h2>
+<ul>
+<li><strong>Principles of M&E:</strong> added the detailed project-management monitoring principles, tools, nine monitoring steps and additional monitoring types from Lesson 1.</li>
+<li><strong>Principles of M&E:</strong> added detailed project evaluation criteria, seven evaluation types and the operational seven-component M&E system from Lesson 2.</li>
+<li><strong>Project Financing:</strong> restored explicit financial-analysis details for coverage ratios, EPS and related per-share/market ratios, the DuPont example and the source pro forma example.</li>
+<li><strong>Course architecture:</strong> checked that local navigation links and linked files resolve correctly inside the final project.</li>
+</ul></section>
+
+<section><h2>5. Completeness Standard Used</h2>
+<p>The audit checked headings, subtopics, distinct concepts, procedures, examples, formula areas and supporting frameworks against the supplied sources. A concept that appeared as a distinct teaching point was not intentionally removed simply because it was short or appeared in a supporting lecture.</p>
+<div class="note"><strong>Source-fidelity rule:</strong> where PDF text extraction did not preserve a mathematical symbol or a diagram formula clearly, the handbook does not invent the missing notation. The source idea is retained and the limitation is stated rather than silently guessing.</div></section>
+
+<section><h2>6. Deployment Readiness</h2>
+<p>The project is a static website. It contains a single <code>index.html</code> entry portal and all course pages are inside the same project folder. It is therefore ready for one GitHub repository and one Vercel deployment link.</p>
+<p><a href="index.html">Open Academic Study Portal</a></p></section>
+</main></body></html>
