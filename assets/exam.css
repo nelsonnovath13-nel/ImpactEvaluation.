@@ -1,0 +1,80 @@
+/* Practice Questions / Model Answers pages — shared styling, consistent with the portal's design system */
+:root{
+  --ex-navy: var(--navy, #0B1220);
+  --ex-blue: var(--blue, #2563EB);
+  --ex-lime: var(--lime, #B8E64C);
+  --ex-bg: #F7F8FA;
+  --ex-ink: #1F2937;
+  --ex-muted: #64748B;
+  --ex-line: #E2E8F0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ex-bg);color:var(--ex-ink);font-family:Inter,"Segoe UI",Arial,sans-serif;line-height:1.72}
+
+.exam-wrap{max-width:880px;margin:0 auto;padding:36px 22px 90px}
+
+.exam-hero{background:linear-gradient(135deg,var(--ex-navy),#172c55);color:#fff;padding:clamp(28px,5vw,46px);border-radius:22px;margin-bottom:28px}
+.exam-kicker{color:var(--ex-lime);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.exam-hero h1{font-size:clamp(1.8rem,4.5vw,2.6rem);line-height:1.15;margin:12px 0 10px}
+.exam-hero p{max-width:640px;color:#dbe4f2;font-size:1.02rem;margin:0}
+
+.exam-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.exam-btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;
+  padding:11px 18px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-family:inherit;min-height:44px}
+.exam-btn-primary{background:var(--ex-lime);color:#172033;border-color:var(--ex-lime)}
+.exam-btn-primary:hover{filter:brightness(0.95)}
+.exam-btn-alt{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
+.exam-btn-alt:hover{background:rgba(255,255,255,.12)}
+.exam-btn-outline{background:#fff;color:var(--ex-navy);border-color:var(--ex-navy)}
+.exam-btn-outline:hover{background:var(--ex-navy);color:#fff}
+
+.exam-note{background:#fff;border:1px solid var(--ex-line);border-left:4px solid var(--ex-blue);border-radius:0 12px 12px 0;
+  padding:16px 20px;margin:0 0 26px;color:#334155;font-size:.95rem}
+
+.exam-questions{list-style:none;counter-reset:exq;padding:0;margin:0;display:flex;flex-direction:column;gap:16px}
+.exam-questions>li{counter-increment:exq;position:relative;background:#fff;border:1px solid var(--ex-line);
+  border-radius:14px;padding:20px 22px 20px 62px}
+.exam-questions>li::before{content:counter(exq);position:absolute;left:18px;top:20px;width:30px;height:30px;
+  border-radius:50%;background:var(--ex-navy);color:#fff;font-weight:800;font-size:.85rem;display:flex;
+  align-items:center;justify-content:center}
+.exam-questions>li p{margin:0;font-size:1.02rem}
+.exam-questions .exam-tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ex-blue);background:#EEF4FF;padding:3px 9px;border-radius:999px;margin-bottom:8px}
+
+.exam-answers{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:20px}
+.exam-answers>li{background:#fff;border:1px solid var(--ex-line);border-radius:14px;padding:22px;scroll-margin-top:90px}
+.exam-q{font-weight:800;color:var(--ex-navy);margin:0 0 12px;font-size:1.02rem;display:flex;gap:10px}
+.exam-q .exam-qnum{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--ex-navy);color:#fff;
+  font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.exam-a{color:#334155;padding-left:40px}
+.exam-a p{margin:0 0 12px}
+.exam-a p:last-child{margin-bottom:0}
+.exam-a ul,.exam-a ol{margin:8px 0 12px;padding-left:22px}
+.exam-a li{margin:5px 0}
+
+.exam-footer-note{margin-top:30px;text-align:center;color:var(--ex-muted);font-size:.88rem}
+.exam-footer-note a{color:var(--ex-blue)}
+
+@media(max-width:600px){
+  .exam-wrap{padding:22px 16px 70px}
+  .exam-hero{padding:26px}
+  .exam-questions>li{padding:18px 16px 18px 54px}
+  .exam-questions>li::before{left:14px;top:18px}
+  .exam-a{padding-left:0;margin-top:10px}
+  .exam-q{flex-wrap:wrap}
+}
+
+@media print{
+  body{background:#fff}
+  .exam-hero{background:#fff;color:#000;border:1px solid #999}
+  .exam-hero p{color:#333}
+  .exam-kicker{color:#173b67}
+  .exam-actions{display:none}
+  .exam-questions>li,.exam-answers>li{border:1px solid #ccc;break-inside:avoid-page}
+  .exam-questions>li::before,.exam-q .exam-qnum{background:#000}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
