@@ -371,7 +371,8 @@
         downloadCombinedPDF(btn, (CFG.subject && CFG.subject.name) || document.title, CFG.siblings);
       });
     } else if(CFG.subject){
-      btn.innerHTML = DOWNLOAD_ICON + " <span>Download This Course as PDF</span>";
+      var label = CFG.page ? ("Download " + CFG.page.name + " as PDF") : "Download This Course as PDF";
+      btn.innerHTML = DOWNLOAD_ICON + " <span>" + escapeHtml(label) + "</span>";
       btn.addEventListener("click", function(){ window.print(); });
     } else {
       return;
