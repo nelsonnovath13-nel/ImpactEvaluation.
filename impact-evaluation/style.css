@@ -1,0 +1,32 @@
+:root{--navy:#0b1220;--blue:#2563eb;--lime:#b8e64c;--bg:#f7f8fa;--paper:#fff;--text:#1f2937;--muted:#64748b;--line:#dbe3ee;--soft:#eff6ff}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.75}.top{background:var(--navy);color:#fff;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px;position:sticky;top:0;z-index:10}.brand{font-weight:800;text-decoration:none;color:#fff}.nav{display:flex;gap:8px;flex-wrap:wrap}.nav a{color:#cbd5e1;text-decoration:none;padding:7px 12px;border-radius:8px}.nav a.active,.nav a:hover{background:#1e3a5f;color:#fff}.hero{background:linear-gradient(135deg,#0b1220,#173b67);color:#fff;padding:72px 7%}.hero .kicker{color:var(--lime);font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.hero h1{font-size:clamp(2rem,5vw,4rem);line-height:1.1;margin:12px 0}.hero p{max-width:800px;color:#dbeafe;font-size:1.08rem}.layout{max-width:1450px;margin:auto;display:grid;grid-template-columns:260px minmax(0,1fr);gap:36px;padding:36px 5% 90px}.toc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;align-self:start;position:sticky;top:78px;max-height:80vh;overflow:auto}.toc strong{display:block;color:var(--navy);margin-bottom:8px}.toc a{display:block;text-decoration:none;color:#475569;padding:6px 8px;border-radius:7px;font-size:.92rem}.toc a:hover{background:var(--soft);color:var(--blue)}article{min-width:0}section{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:32px;margin-bottom:24px;scroll-margin-top:90px}h2{color:var(--navy);line-height:1.25;margin-top:0;border-bottom:2px solid #e7edf5;padding-bottom:12px}h3{color:#173b67;margin-top:30px;line-height:1.35}p{margin:10px 0 16px}.lead{font-size:1.08rem;color:#334155}.note,.definition,.deep,.scenario{padding:18px 20px;border-radius:12px;margin:20px 0}.definition{background:#f8fafc;border-left:4px solid var(--blue)}.note{background:#fffbea;border-left:4px solid #eab308}.deep{background:var(--soft);border-left:4px solid var(--blue)}.scenario{background:#f7fcef;border:1px solid #d9e8bc}.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0;border-radius:8px}table{width:100%;min-width:560px;border-collapse:collapse;margin:0;font-size:.95rem}th,td{border:1px solid var(--line);padding:12px;text-align:left;vertical-align:top}th{background:#eef4ff;color:#173b67}ul,ol{padding-left:25px}li{margin:7px 0}@media(max-width:900px){.layout{grid-template-columns:1fr}.toc{position:relative;top:auto;max-height:none}.top{position:relative}.nav{font-size:.9rem}}@media(max-width:600px){section{padding:22px}.hero{padding:52px 7%}.top{align-items:flex-start;flex-direction:column}}
+
+/* Missing component styles restored: .cards/.card/.num/.badge (course grid on index.html),
+   .footer, .formula/.eq (formula boxes on l3.html), ol.steps (numbered procedure lists) —
+   these classes were used in the HTML from the start but never defined in this stylesheet,
+   so they rendered as unstyled browser-default text/links. */
+.footer{text-align:center;color:var(--muted);font-size:.85rem;padding:10px 5% 50px;max-width:1450px;margin:0 auto}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:1450px;margin:0 auto;padding:0 5% 60px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:6px;transition:transform .15s ease,box-shadow .15s ease}
+.card:hover,.card:focus-visible{transform:translateY(-3px);box-shadow:0 10px 26px rgba(11,18,32,.10)}
+.card h2{font-size:1.25rem;line-height:1.3;margin:2px 0 4px;border:0;padding:0;color:var(--navy)}
+.card p{color:var(--muted);font-size:.92rem;margin:0 0 6px;line-height:1.5}
+.num{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:var(--blue);text-transform:uppercase}
+.badge{align-self:flex-start;background:var(--soft);color:var(--blue);font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em;margin-top:4px}
+
+ol.steps{padding-left:22px}
+ol.steps li{padding-left:6px;margin:10px 0}
+
+.formula{background:#faf7ff;border-left:4px solid #7c3aed;padding:18px 20px;border-radius:0 12px 12px 0;margin:20px 0}
+.formula ul{margin:10px 0 0;padding-left:20px}
+.formula li{margin:6px 0}
+.eq{font-family:Cambria,"Cambria Math",Georgia,serif;font-size:1.15rem;font-weight:700;color:var(--navy);background:#fff;border:1px solid #e4d9fb;border-radius:8px;padding:10px 14px;display:inline-block;margin:0 0 4px}
+
+@media(max-width:600px){.cards{grid-template-columns:1fr;padding:0 6% 50px}}
+
+/* Final responsive and accessibility audit layer */
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+a:focus-visible,button:focus-visible{outline:3px solid #B8E64C;outline-offset:3px}
+p,li{overflow-wrap:break-word}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media(max-width:480px){body{font-size:16px;line-height:1.68}section{padding:20px!important;border-radius:14px}table{font-size:.88rem}.hero{padding:42px 7%!important}}

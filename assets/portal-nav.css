@@ -1,0 +1,91 @@
+/* Academic Study Portal — shared navigation layer (breadcrumbs, progress, active section, prev/next, mobile drawer) */
+:root{
+  --pn-navy: var(--navy, #0B1220);
+  --pn-blue: var(--blue, #2563EB);
+  --pn-lime: var(--lime, #B8E64C);
+}
+
+/* Top utility bar: Home + breadcrumb, identical on every page */
+#pn-bar{position:sticky;top:0;z-index:2147483000;display:flex;align-items:center;gap:6px;
+  background:#0B1220;color:#E8EEFB;padding:8px 14px;min-height:40px;box-sizing:border-box;
+  font-family:Inter,"Segoe UI",Arial,sans-serif;font-size:13px;border-bottom:1px solid #1e293b}
+#pn-bar a{color:#E8EEFB;text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+  border-radius:6px;padding:5px 7px;flex:0 0 auto}
+#pn-bar a:hover{background:#1e293b;color:#fff}
+#pn-bar svg{width:16px;height:16px;flex:0 0 auto}
+#pn-crumbs{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;min-width:0;flex:1;overflow:hidden}
+#pn-crumbs .pn-sep{color:#64748b;flex:0 0 auto}
+#pn-crumbs .pn-current{font-weight:700;color:#fff;padding:5px 6px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;min-width:0}
+#pn-crumbs a{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:34vw}
+#pn-menu-btn{margin-left:auto;flex:0 0 auto;background:#16233b;border:1px solid #2a3a56;color:#fff;
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:700;cursor:pointer;display:none;
+  align-items:center;gap:6px;font-family:inherit;min-height:36px}
+@media(max-width:860px){#pn-menu-btn.pn-has-toc{display:inline-flex}}
+
+/* Reading progress */
+#pn-progress{position:sticky;top:40px;z-index:2147482999;height:3px;background:rgba(255,255,255,.06)}
+#pn-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--pn-blue),var(--pn-lime))}
+@media(prefers-reduced-motion:no-preference){#pn-progress-bar{transition:width .12s linear}}
+
+/* Active section indicator applied to a page's own TOC/sidebar links */
+a.pn-active{background:#eaf1ff!important;color:#1d4ed8!important;font-weight:800!important;
+  box-shadow:inset 3px 0 0 var(--pn-blue)}
+a.pn-active::after{content:"●";margin-left:6px;font-size:8px;vertical-align:middle;color:var(--pn-blue)}
+
+/* Mobile TOC drawer (built from the page's own in-page navigation, so it always matches) */
+#pn-backdrop{position:fixed;inset:0;background:rgba(3,7,18,.55);z-index:2147483100;display:none}
+#pn-backdrop.pn-open{display:block}
+#pn-drawer{position:fixed;top:0;left:0;bottom:0;width:min(86vw,340px);background:#0B1220;color:#e8eefb;
+  z-index:2147483200;transform:translateX(-105%);overflow:auto;padding:14px;box-sizing:border-box;
+  box-shadow:2px 0 24px rgba(0,0,0,.35)}
+@media(prefers-reduced-motion:no-preference){#pn-drawer{transition:transform .22s ease}}
+#pn-drawer.pn-open{transform:translateX(0)}
+#pn-drawer .pn-drawer-head{position:sticky;top:0;background:#0B1220;display:flex;align-items:center;
+  justify-content:space-between;padding-bottom:10px;margin-bottom:6px;border-bottom:1px solid #1e293b}
+#pn-drawer .pn-drawer-title{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--pn-lime)}
+#pn-drawer .pn-close{background:#16233b;border:1px solid #2a3a56;color:#fff;border-radius:8px;
+  width:34px;height:34px;font-size:16px;cursor:pointer;line-height:1}
+#pn-drawer a{display:block;color:#cfd9ea;text-decoration:none;padding:9px 10px;border-radius:8px;font-size:14px;min-height:38px;display:flex;align-items:center}
+#pn-drawer a:hover{background:#17243b;color:#fff}
+#pn-drawer a.pn-active{background:#17243b!important;color:#fff!important;box-shadow:inset 3px 0 0 var(--pn-lime)}
+#pn-drawer a.pn-active::after{color:var(--pn-lime)}
+
+/* Prev / Next / Back-to-subject block, injected before each page's footer */
+#pn-nextprev{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0 10px;font-family:inherit}
+#pn-nextprev .pn-nav-card{border:1px solid #dfe5ef;background:#fff;border-radius:14px;padding:16px 18px;
+  text-decoration:none;color:#172033;display:flex;flex-direction:column;gap:4px;min-height:64px;justify-content:center}
+#pn-nextprev .pn-nav-card:hover{border-color:var(--pn-blue);box-shadow:0 4px 14px rgba(37,99,235,.14)}
+#pn-nextprev .pn-nav-card .pn-label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#64748b}
+#pn-nextprev .pn-nav-card .pn-name{font-size:15px;font-weight:700}
+#pn-nextprev .pn-next{text-align:right;align-items:flex-end}
+#pn-subject-link{grid-column:1/-1;text-align:center;margin-bottom:2px}
+#pn-subject-link a{display:inline-block;background:#eef2f8;color:#172033;text-decoration:none;
+  padding:9px 16px;border-radius:10px;font-weight:700;font-size:13px}
+#pn-subject-link a:hover{background:#e2e8f4}
+#pn-backhome{display:flex;justify-content:center;margin:20px 0 4px}
+#pn-backhome a{background:#0B1220;color:#fff;text-decoration:none;padding:11px 18px;border-radius:10px;font-weight:700;font-size:14px}
+#pn-backhome a:hover{background:#172033}
+@media(max-width:700px){#pn-nextprev{grid-template-columns:1fr}#pn-nextprev .pn-next{text-align:left;align-items:flex-start}}
+
+/* Continue-where-you-left-off toast */
+#pn-toast{position:fixed;right:16px;bottom:16px;left:auto;max-width:320px;width:calc(100vw - 32px);
+  background:#0B1220;color:#e8eefb;border-radius:14px;padding:14px 16px;box-shadow:0 12px 30px rgba(0,0,0,.35);
+  z-index:2147483300;display:flex;flex-direction:column;gap:8px;font-size:13px;font-family:Inter,"Segoe UI",Arial,sans-serif;
+  transform:translateY(140%);opacity:0}
+@media(prefers-reduced-motion:no-preference){#pn-toast{transition:transform .3s ease,opacity .3s ease}}
+#pn-toast.pn-show{transform:translateY(0);opacity:1}
+#pn-toast .pn-toast-title{font-weight:800}
+#pn-toast .pn-toast-row{display:flex;gap:8px;justify-content:flex-end;margin-top:2px}
+#pn-toast button{border:0;border-radius:8px;padding:8px 12px;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit}
+#pn-toast .pn-resume{background:var(--pn-lime);color:#172033}
+#pn-toast .pn-dismiss{background:#16233b;color:#cfd9ea}
+
+/* Focus visibility, consistent everywhere this layer touches */
+#pn-bar a:focus-visible,#pn-menu-btn:focus-visible,#pn-drawer a:focus-visible,#pn-drawer .pn-close:focus-visible,
+#pn-nextprev a:focus-visible,#pn-subject-link a:focus-visible,#pn-backhome a:focus-visible,#pn-toast button:focus-visible{
+  outline:3px solid var(--pn-lime);outline-offset:2px}
+
+@media(prefers-reduced-motion:reduce){
+  #pn-drawer,#pn-toast,#pn-progress-bar{transition:none!important}
+}
